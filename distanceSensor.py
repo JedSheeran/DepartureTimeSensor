@@ -1,7 +1,7 @@
 import time
 from gpiozero import DistanceSensor
 
-ultrasonic = DistanceSensor(echo=17, trigger=4, threshold_distance=0.5)
+ultrasonic = DistanceSensor(echo=17, trigger=4, threshold_distance=0.1)
 carNum = 0
 departureTime = 0
 
