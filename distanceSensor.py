@@ -19,6 +19,7 @@ while True:
     print("Out of range")
     with open("departure_time.txt", "a") as file:
         file.write("Car # ", carNum, "   Time at Window: ", departureTime, "\n")
+    time.sleep(1)
 
 
 def carAtWindow():
