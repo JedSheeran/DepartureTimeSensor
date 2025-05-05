@@ -10,7 +10,7 @@ try:
         print(ultrasonic.distance)
         ultrasonic.wait_for_in_range()
         start = time.time()
-        carNum+=1
+        carNum = carNum + 1
         print("***In range***")
 
         ultrasonic.wait_for_out_of_range()
