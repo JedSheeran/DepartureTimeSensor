@@ -6,7 +6,7 @@ ultrasonic = DistanceSensor(echo=17, trigger=4, threshold_distance=0.1)
 carNum = 0
 departureTime = 0
 
-def writeToGoogleSheet(int carNumVar, int timeVar):
+def writeToGoogleSheet(carNumVar, timeVar):
     googleSheet.writeToGoogleSheet(carNumVar, timeVar)
     return
 
