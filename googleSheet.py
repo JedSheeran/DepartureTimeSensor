@@ -9,11 +9,17 @@ sh = gc.open('departure_time')
 wks = sh.sheet1
 
 # Update a cell with value (just to let him know values is updated ;) )
-wks.update_value('A1', "Hey yank this numpy array")
-my_nparray = np.random.randint(10, size=(3, 4))
+#wks.update_value('A1', "Hey yank this numpy array")
+#my_nparray = np.random.randint(10, size=(3, 4))
 
 # update the sheet with array
-wks.update_values('A2', my_nparray.tolist())
+#wks.update_values('A2', my_nparray.tolist())
 
 # share the sheet with your friend
-sh.share("christopher.diaz@ranchocfa.com, role='writer', notify=True)")
+#h.share("christopher.diaz@ranchocfa.com, role='writer', notify=True)")
+
+def writeToGoogleSheet(carNumVar, timeVar):
+    sh = gc.open('departure_time')
+    wks = sh.sheet1
+    wks.append_table(values=[carNumVar, timeVar])
+    return
