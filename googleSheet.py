@@ -1,6 +1,7 @@
 import pygsheets
 import numpy as np
 
+# Authorize pygsheets with your .json file
 gc = pygsheets.authorize(client_secret='/home/cfarancho/DepartureTimeSensor/client_secret_45261759359-tqclvslpu4pkvoe96nfc2462i2aro3gb.apps.googleusercontent.com.json')
 #gc = pygsheets.authorize(client_secret='Documents/Python/DepartureTimeSensor/client_secret_45261759359-tqclvslpu4pkvoe96nfc2462i2aro3gb.apps.googleusercontent.com.json')
 
@@ -16,10 +17,13 @@ wks = sh.sheet1
 #wks.update_values('A2', my_nparray.tolist())
 
 # share the sheet with your friend
-#h.share("christopher.diaz@ranchocfa.com, role='writer', notify=True)")
+sh.share("christopher.diaz@ranchocfa.com, role='writer', notify=True)")
 
-def writeToGoogleSheet(carNumVar, timeVar):
+# Function to write to Google Sheets
+def writeToGoogleSheet(carNumVar, timeVar, dateVar):
+    # Open spreadsheet and then worksheet
     sh = gc.open('departure_time')
     wks = sh.sheet1
-    wks.append_table(values=[carNumVar, timeVar])
+    # Update the sheet with the values
+    wks.append_table(values=[carNumVar, timeVar, dateVar])
     return
