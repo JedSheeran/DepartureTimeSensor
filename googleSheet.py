@@ -2,7 +2,7 @@ import pygsheets
 import numpy as np
 
 
-gc = pygsheets.authorize(service_file='/home/cfarancho/DepartureTimeSensor/cfa-departure-time-0d4e2479aa08.json')
+gc = pygsheets.authorize(service_file='/home/cfarancho/DepartureTimeSensor/cfa-departure-time-cf700c401d86.json')
 #gc = pygsheets.authorize(client_secret='/home/cfarancho/DepartureTimeSensor/client_secret_45261759359-tqclvslpu4pkvoe96nfc2462i2aro3gb.apps.googleusercontent.com.json')
 # Authorize pygsheets with your .json file
 #gc = pygsheets.authorize(client_secret='/home/cfarancho/DepartureTimeSensor/client_secret_45261759359-tqclvslpu4pkvoe96nfc2462i2aro3gb.apps.googleusercontent.com.json')
@@ -20,7 +20,7 @@ wks = sh.sheet1
 #wks.update_values('A2', my_nparray.tolist())
 
 # share the sheet with your friend
-sh.share("christopher.diaz@ranchocfa.com, role='writer', notify=True)")
+#sh.share("christopher.diaz@ranchocfa.com, role='writer', notify=True)")
 
 # Function to write to Google Sheets
 def writeToGoogleSheet(carNumVar, timeVar, dateVar):
