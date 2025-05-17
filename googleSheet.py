@@ -1,7 +1,8 @@
 import pygsheets
 import numpy as np
 
-gc = pygsheets.authorize(client_secret='/home/cfarancho/DepartureTimeSensor/client_secret_45261759359-tqclvslpu4pkvoe96nfc2462i2aro3gb.apps.googleusercontent.com.json')
+gc = pygsheets.authorize(service_file='/home/cfarancho/DepartureTimeSensor/cfa-departure-time-0d4e2479aa08.json')
+#gc = pygsheets.authorize(client_secret='/home/cfarancho/DepartureTimeSensor/client_secret_45261759359-tqclvslpu4pkvoe96nfc2462i2aro3gb.apps.googleusercontent.com.json')
 #gc = pygsheets.authorize(client_secret='Documents/Python/DepartureTimeSensor/client_secret_45261759359-tqclvslpu4pkvoe96nfc2462i2aro3gb.apps.googleusercontent.com.json')
 
 # Open spreadsheet and then worksheet
