@@ -50,5 +50,6 @@ try:
 
         #waits for 1 second before checking again
         time.sleep(1)
+        
 except KeyboardInterrupt:
     print("\nProgram stopped by user.")
