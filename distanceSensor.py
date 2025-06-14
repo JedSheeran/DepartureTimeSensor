@@ -47,6 +47,7 @@ def stopLoop():
 # It uses the ultrasonic sensor to detect the car's presence
 # The loop runs indefinitely until interrupted by the user
 def start():
+    global carNum, carInRange, startTime, running
     try:
         while running:
             print("waiting for car to arrive...")
