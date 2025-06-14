@@ -24,13 +24,16 @@ title_label.pack(pady=(20, 10))
 # Timer and Average Time Labels
 timer_label = tk.Label(
     root, 
-    text="Current Car: 00:00", 
-    font=("Arial", 34),
+    text="Current Car \n00:00", 
+    font=("Arial", 104, "bold"),
     fg="#004f71",
-    bg="white"
+    bg="white",
+    justify="center",
+    anchor="center"
 )
-timer_label.pack(pady=10)
+timer_label.pack(pady=10, fill="both", expand=True)
 
+'''
 average_time_label = tk.Label(
     root, 
     text="Average Time: 00:00", 
@@ -39,7 +42,8 @@ average_time_label = tk.Label(
     bg="white"
 )
 average_time_label.pack(side="left", anchor="w", padx=20, pady=10)
-
+'''
+'''
 # Cars Counted Label
 car_count_label = tk.Label(
     root, 
@@ -49,6 +53,7 @@ car_count_label = tk.Label(
     bg="white"
 )
 car_count_label.pack(side="right", anchor="e", padx=20)
+'''
 
 # Function to update the timer label
 # This function will be called every 100 milliseconds to update the timer label
@@ -57,8 +62,8 @@ def update_timer():
     formattedTime = distanceSensor.formatTime(elapsedTime)
     carNum = distanceSensor.carNum
     #formattedTime = "00:00" 
-    timer_label.config(text=f"Current Car: {formattedTime}")
-    car_count_label.config(text=f"Car #{carNum}")
+    timer_label.config(text=f"\nCurrent Car\n{formattedTime}\n\n")
+    #car_count_label.config(text=f"Car #{carNum}")
     root.after(100, update_timer)
     
 def exit_fullscreen(event):
