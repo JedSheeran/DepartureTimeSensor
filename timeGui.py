@@ -59,9 +59,9 @@ def update_timer():
     averageTime = distanceSensor.getHourlyAverage()
     #formattedTime = "00:00" 
     timer_label.config(text=f"Current Car: {formattedTime}")
-    average_time_label.config(text=f"Average Time: {averageTime}")
     car_count_label.config(text=f"Car #{carNum}")
     root.after(100, update_timer)
+    average_time_label.config(text=f"Average Time: {averageTime}")
     
 def exit_fullscreen(event):
     root.attributes("-fullscreen", False)
