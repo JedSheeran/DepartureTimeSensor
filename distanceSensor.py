@@ -57,8 +57,8 @@ def getHourlyAverage():
     durations = []
     for row in rows:
         try:
-            duration_str = row[1]  # "MM:SS"
-            timestamp_str = row[2]  # "YYYY-MM-DD HH:MM:SS"
+            duration_str = row[2]  # "MM:SS"
+            timestamp_str = row[3]  # "YYYY-MM-DD HH:MM:SS"
 
             timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
 
