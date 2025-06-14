@@ -33,10 +33,6 @@ def formatTime(seconds):
     seconds = seconds % 60
     return f"{int(minutes):02}:{int(seconds):02}"
 
-def mmssToSeconds(mmss):
-    minutes, seconds = map(int, mmss.split(":"))
-    return minutes * 60 + seconds
-
 def getElapsedTime():
     if carInRange and startTime:
         return time.time() - startTime
@@ -45,34 +41,6 @@ def getElapsedTime():
 def stopLoop():
     global running
     running = False
-
-def getHourlyAverage():
-    now = datetime.now()
-    current_hour = now.hour
-    current_date = now.date()
-
-    # Get all rows from Google Sheet
-    rows = googleSheet.readAllRows()
-
-    durations = []
-    for row in rows:
-        try:
-            duration_str = row[2]  # "MM:SS"
-            timestamp_str = row[3]  # "YYYY-MM-DD HH:MM:SS"
-
-            timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
-
-            if timestamp.date() == current_date and timestamp.hour == current_hour:
-                durations.append(mmssToSeconds(duration_str))
-
-        except (IndexError, ValueError):
-            continue  # Skip malformed rows
-
-    if not durations:
-        return 0
-
-    average = sum(durations) / len(durations)
-    return formatTime(average)
 
 # Main loop
 # This loop waits for a car to arrive and then records the time it leaves
