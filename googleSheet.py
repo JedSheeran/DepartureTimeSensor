@@ -18,6 +18,10 @@ wks = sh.sheet1
 # share the sheet with your friend
 #sh.share("christopher.diaz@ranchocfa.com, role='writer', notify=True)")
 
+def readAllRows():
+    # Read all rows from the Google Sheet
+    return wks.get_all_values(returnas='matrix')[1:]  # Skip the header row
+
 # Function to write to Google Sheets
 def writeToGoogleSheet(carNumVar, timeVar, dateVar):
     # Open spreadsheet and then worksheet

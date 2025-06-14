@@ -56,8 +56,10 @@ def update_timer():
     elapsedTime = distanceSensor.getElapsedTime()
     formattedTime = distanceSensor.formatTime(elapsedTime)
     carNum = distanceSensor.carNum
+    averageTime = distanceSensor.getHourlyAverage()
     #formattedTime = "00:00" 
     timer_label.config(text=f"Current Car: {formattedTime}")
+    average_time_label.config(text=f"Average Time: {averageTime}")
     car_count_label.config(text=f"Car #{carNum}")
     root.after(100, update_timer)
     
