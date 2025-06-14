@@ -2,10 +2,15 @@ import time
 import googleSheet 
 from datetime import datetime
 from gpiozero import DistanceSensor
+import threading
 
 # Declare the ultrasonic sensor
+#Global State
 ultrasonic = DistanceSensor(echo=17, trigger=4, threshold_distance=0.5)
 carNum = 0
+carInRange = False
+startTime = None
+running = True
 
 # Function to write to Google Sheets
 def writeToGoogleSheet(carNumVar, timeVar, dateVar):
@@ -28,22 +33,33 @@ def formatTime(seconds):
     seconds = seconds % 60
     return f"{int(minutes):02}:{int(seconds):02}"
 
+def getElapsedTime():
+    if carInRange and startTime:
+        return time.time() - startTime
+    return 0
+
+def stopLoop():
+    global running
+    running = False
+
 # Main loop
 # This loop waits for a car to arrive and then records the time it leaves
 # It uses the ultrasonic sensor to detect the car's presence
 # The loop runs indefinitely until interrupted by the user
 try:
-    while True:
+    while running:
         print("waiting for car to arrive...")
         ultrasonic.wait_for_in_range()
-        start = time.time()
+        startTime = time.time()
         carNum = carNum + 1
+        carInRange = True
         print("***In range***")
 
         # Wait for the car to leave
         ultrasonic.wait_for_out_of_range()
+        carInRange = False
         end = time.time()
-        departureTime = formatTime(end - start)
+        departureTime = formatTime(end - startTime)
         print("Car# ", carNum, "Time at Window: ", departureTime)
         print("***Out of range***")
         writeToGoogleSheet(carNum, departureTime, getCurrentTime())
