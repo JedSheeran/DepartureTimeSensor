@@ -46,26 +46,27 @@ def stopLoop():
 # This loop waits for a car to arrive and then records the time it leaves
 # It uses the ultrasonic sensor to detect the car's presence
 # The loop runs indefinitely until interrupted by the user
-try:
-    while running:
-        print("waiting for car to arrive...")
-        ultrasonic.wait_for_in_range()
-        startTime = time.time()
-        carNum = carNum + 1
-        carInRange = True
-        print("***In range***")
+def start():
+    try:
+        while running:
+            print("waiting for car to arrive...")
+            ultrasonic.wait_for_in_range()
+            startTime = time.time()
+            carNum = carNum + 1
+            carInRange = True
+            print("***In range***")
 
-        # Wait for the car to leave
-        ultrasonic.wait_for_out_of_range()
-        carInRange = False
-        end = time.time()
-        departureTime = formatTime(end - startTime)
-        print("Car# ", carNum, "Time at Window: ", departureTime)
-        print("***Out of range***")
-        writeToGoogleSheet(carNum, departureTime, getCurrentTime())
+            # Wait for the car to leave
+            ultrasonic.wait_for_out_of_range()
+            carInRange = False
+            end = time.time()
+            departureTime = formatTime(end - startTime)
+            print("Car# ", carNum, "Time at Window: ", departureTime)
+            print("***Out of range***")
+            writeToGoogleSheet(carNum, departureTime, getCurrentTime())
 
-        #waits for 1 second before checking again
-        time.sleep(1)
+            #waits for 1 second before checking again
+            time.sleep(1)
         
-except KeyboardInterrupt:
-    print("\nProgram stopped by user.")
+    except KeyboardInterrupt:
+        print("\nProgram stopped by user.")
