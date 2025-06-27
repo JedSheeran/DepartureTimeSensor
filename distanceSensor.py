@@ -6,7 +6,7 @@ import threading
 
 # Declare the ultrasonic sensor
 #Global State
-ultrasonic = DistanceSensor(echo=17, trigger=4, threshold_distance=0.5)
+ultrasonic = DistanceSensor(echo=17, trigger=4, threshold_distance=2, max_distance=2.5)
 carNum = 0
 carInRange = False
 startTime = None
