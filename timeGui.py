@@ -22,7 +22,7 @@ title_label.pack(pady=(20, 10))
 timer_label = tk.Label(
     root, 
     text="Current Car \n00:00", 
-    font=("Arial", 104, "bold"),
+    font=("Arial", 60, "bold"),
     fg="#004f71",
     bg="white",
     justify="center",
@@ -30,7 +30,7 @@ timer_label = tk.Label(
 )
 timer_label.pack(pady=10, fill="both", expand=True)
 
-bottom_frame = tk.Frame(root, bg="white")
+bottom_frame = tk.Frame(root, bg="white", highlightbackground="black", highlightthickness=2)
 bottom_frame.pack(fill="x", side="bottom", pady=10)
 
 # Hourly Average Time Label
