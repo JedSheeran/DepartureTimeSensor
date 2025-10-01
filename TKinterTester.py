@@ -29,7 +29,7 @@ def main():
     )
     timer_label.pack(pady=10, fill="both", expand=True)
 
-    bottom_frame = tk.Frame(root, bg="white")
+    bottom_frame = tk.Frame(root, bg="white", highlightbackground="black", highlightthickness=2)
     bottom_frame.pack(fill="x", side="bottom", pady=10)
 
     # Hourly Average Time Label
