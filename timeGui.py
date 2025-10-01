@@ -31,8 +31,7 @@ timer_label = tk.Label(
     justify="center",
     anchor="center"
 )
-#timer_label.pack(pady=10, fill="both", expand=True)
-timer_label.pack(pady=10)
+timer_label.pack(pady=10, fill="both", expand=True)
 
 bottom_frame = tk.Frame(root, bg="white")
 bottom_frame.pack(fill="x", side="bottom", pady=10)
@@ -43,7 +42,7 @@ average_time_label = tk.Label(
     text="Average Time: 00:00", 
     font=("Arial", 28),
     fg="#004f71",
-    bg="white"
+    bg="black"
 )
 average_time_label.pack(in_=bottom_frame, side="left", anchor="w", padx=20)
 
@@ -53,7 +52,7 @@ last_car_time_label = tk.Label(
     text="Last Cars Time: 00:00", 
     font=("Arial", 28),
     fg="#004f71",
-    bg="white"
+    bg="black"
 )
 last_car_time_label.pack(in_=bottom_frame, side="right", anchor="e", padx=20)
 
