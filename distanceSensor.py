@@ -1,7 +1,7 @@
 import time
 import googleSheet
 from datetime import datetime, timedelta
-from gpiozero import DisanceSensor
+from gpiozero import DistanceSensor
 
 ultrasonic = DistanceSensor(echo=17, trigger=4, threshold_distance=2, max_distance=2.5)
 carNum = 0
