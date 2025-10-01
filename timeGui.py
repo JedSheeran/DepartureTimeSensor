@@ -2,8 +2,6 @@ import tkinter as tk
 import distanceSensor
 import threading
 
-threading.Thread(target=distanceSensor.start, daemon=True).start()
-
 root = tk.Tk()
 root.title("Departure Time Tracker")
 root.configure(bg="white")
@@ -57,8 +55,24 @@ last_car_time_label = tk.Label(
 last_car_time_label.pack(in_=bottom_frame, side="right", anchor="e", padx=20)
 
 
+def update_timer():
+    distanceSensor.withinHours()
+    if distanceSensor.afterOperatingHours:
+        timer_label.config(text="\nOutside of Operating Hours\n\n")
+        last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime}")
+        root.after(60000, update_timer)  # Check again in 60 seconds
+        return
+    distanceSensor.checkSensor()
+
+    elapsedTime = distanceSensor.getElapsedTime()
+    timer_label.config(text=f"\nCurrent Car\n{distanceSensor.formatTime(elapsedTime)}\n\n")
+    last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime}")
+    root.after(100, update_timer)
+
+
 # Function to update the timer label
 # This function will be called every 100 milliseconds to update the timer label
+'''
 def update_timer():
     elapsedTime = distanceSensor.getElapsedTime()
     formattedTime = distanceSensor.formatTime(elapsedTime)
@@ -67,6 +81,7 @@ def update_timer():
     timer_label.config(text=f"\nCurrent Car\n{formattedTime}\n\n")
     last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime}")
     root.after(100, update_timer)
+    '''
 
 # Function to get and update the average time label
 # This function will be called every 60 seconds to update the average time label

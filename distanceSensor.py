@@ -1,17 +1,14 @@
 import time
 import googleSheet
 from datetime import datetime, timedelta
-from gpiozero import DistanceSensor
-#import threading
+from gpiozero import DisanceSensor
 
-# Declare the ultrasonic sensor
-#Global State
 ultrasonic = DistanceSensor(echo=17, trigger=4, threshold_distance=2, max_distance=2.5)
 carNum = 0
 carInRange = False
 startTime = None
-running = True
 prevCarTime = None
+afterOperatingHours = False
 
 # Function to write to Google Sheets
 def writeToGoogleSheet(carNumVar, timeVar, dateVar):
@@ -40,6 +37,9 @@ def getElapsedTime():
         return time.time() - startTime
     return 0
 
+def getPrevCarȚime():
+    return prevCarTime
+
 # Function to get the average time for the current hour
 # This function reads all rows from the Google Sheet, filters them by the current hour
 def getAverageTimeForHour():
@@ -65,43 +65,33 @@ def getAverageTimeForHour():
         return formatTime(averageSeconds)
     return "00:00"
 
-def stopLoop():
-    global running
-    running = False
+def withinHours():
+    now = datetime.now().time()
+    if now >= datetime.strptime("22:15", "%H:%M").time() or now <= datetime.strptime("06:30", "%H:%M").time():
+        print("Outside of operating hours. Waiting until 6:00 AM to resume.")
+        afterOperatingHours = True
+        return afterOperatingHours
+    afterOperatingHours = False
+    return afterOperatingHours
 
-# Main loop
-# This loop waits for a car to arrive and then records the time it leaves
-# It uses the ultrasonic sensor to detect the car's presence
-# The loop runs indefinitely until interrupted by the user
-def start():
-    global carNum, carInRange, startTime, running, prevCarTime
-    try:
-        while running:
-            now = datetime.now().time()
-            if now >= datetime.strptime("22:15", "%H:%M").time() or now <= datetime.strptime("06:30", "%H:%M").time():
-                print("Outside of operating hours. Waiting until 6:00 AM to resume.")
-                time.sleep(60)  # Sleep for 1 minute before checking again
-            else:
-                print("waiting for car to arrive...")
-                ultrasonic.wait_for_in_range()
-                startTime = time.time()
-                carNum = carNum + 1
-                carInRange = True
-                print("***In range***")
 
-                # Wait for the car to leave
-                ultrasonic.wait_for_out_of_range()
-                carInRange = False
-                end = time.time()
-                departureTime = formatTime(end - startTime)
-                print("Car# ", carNum, "Time at Window: ", departureTime)
-                print("***Out of range***")
-                prevCarTime = departureTime
-                writeToGoogleSheet(carNum, departureTime, getCurrentTime())
-                
-
-                #waits for 1 second before checking again
-                time.sleep(1)
-        
-    except KeyboardInterrupt:
-        print("\nProgram stopped by user.")
+def checkSensor():
+    global carNum, carInRange, startTime, prevCarTime
+    if afterOperatingHours:
+        return 
+    
+    if ultrasonic.in_range and not carInRange:
+        carInRange = True
+        startTime = time.time()
+        carNum += 1
+        print("***In range***")
+    elif not ultrasonic.in_range and carInRange:
+        carInRange = False
+        if startTime:
+            elapsedTime = time.time() - startTime
+            formattedTime = formatTime(elapsedTime)
+            currentTime = getCurrentTime()
+            prevCarTime = formattedTime
+            print("Car# ", carNum, "Time at Window: ", prevCarTime)
+            print("***Out of range***")
+            writeToGoogleSheet(carNum, formattedTime, currentTime)
