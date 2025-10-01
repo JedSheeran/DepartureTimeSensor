@@ -1,6 +1,5 @@
 import tkinter as tk
 import distanceSensor
-import threading
 
 root = tk.Tk()
 root.title("Departure Time Tracker")
@@ -66,7 +65,7 @@ def update_timer():
 
     elapsedTime = distanceSensor.getElapsedTime()
     timer_label.config(text=f"\nCurrent Car\n{distanceSensor.formatTime(elapsedTime)}\n\n")
-    last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime}")
+    last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime or '00:00'}")
     root.after(100, update_timer)
 
 
@@ -87,7 +86,7 @@ def update_timer():
 # This function will be called every 60 seconds to update the average time label
 def get_average_time():
     averageTime = distanceSensor.getAverageTimeForHour()
-    average_time_label.config(text=f"Average Time: {averageTime}")
+    average_time_label.config(text=f"Average Time: {averageTime or '00:00'}")
     root.after(60000, get_average_time)  # Update every minute
     
 def exit_fullscreen(event):
