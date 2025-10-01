@@ -46,7 +46,7 @@ average_time_label.pack(side="left", anchor="w", padx=20, pady=10)
 # Last Cars Time Label
 last_car_time_label = tk.Label(
     root, 
-    text="Last Cars Time: {distanceSensor.previousCarTime()}", 
+    text="Last Cars Time: 00:00", 
     font=("Arial", 28),
     fg="#004f71",
     bg="white"
