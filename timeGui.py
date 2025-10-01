@@ -24,7 +24,7 @@ timer_label = tk.Label(
     text="Current Car \n00:00", 
     font=("Arial", 104, "bold"),
     fg="#004f71",
-    bg="white",
+    bg="white", highlightbackground="black", highlightthickness=2,
     justify="center",
     anchor="center"
 )
