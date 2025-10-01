@@ -64,7 +64,7 @@ def update_timer():
     distanceSensor.checkSensor()
 
     elapsedTime = distanceSensor.getElapsedTime()
-    timer_label.config(text=f"\nCurrent Car\n{distanceSensor.formatTime(elapsedTime)}")
+    timer_label.config(text=f"Current Car\n{distanceSensor.formatTime(elapsedTime)}")
     last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime or '00:00'}")
     root.after(100, update_timer)
 

@@ -68,7 +68,7 @@ def getAverageTimeForHour():
 def withinHours():
     global afterOperatingHours
     now = datetime.now().time()
-    if now >= datetime.strptime("22:15", "%H:%M").time() or now <= datetime.strptime("06:30", "%H:%M").time():
+    if now >= datetime.strptime("15:09", "%H:%M").time() or now <= datetime.strptime("06:30", "%H:%M").time():
         print("Outside of operating hours. Waiting until 6:00 AM to resume.")
         afterOperatingHours = True
         return afterOperatingHours
@@ -81,7 +81,7 @@ def checkSensor():
     if afterOperatingHours:
         return 
     
-    print("***Waiting for car***")
+    #print("***Waiting for car***")
     if ultrasonic.in_range and not carInRange:
         carInRange = True
         startTime = time.time()
