@@ -31,7 +31,11 @@ timer_label = tk.Label(
     justify="center",
     anchor="center"
 )
-timer_label.pack(pady=10, fill="both", expand=True)
+#timer_label.pack(pady=10, fill="both", expand=True)
+timer_label.pack(pady=10)
+
+bottom_frame = tk.Frame(root, bg="white")
+bottom_frame.pack(fill="x", side="bottom", pady=10)
 
 # Hourly Average Time Label
 average_time_label = tk.Label(
@@ -41,7 +45,7 @@ average_time_label = tk.Label(
     fg="#004f71",
     bg="white"
 )
-average_time_label.pack(side="left", anchor="w", padx=20, pady=10)
+average_time_label.pack(in_=bottom_frame, side="left", anchor="w", padx=20)
 
 # Last Cars Time Label
 last_car_time_label = tk.Label(
@@ -51,7 +55,7 @@ last_car_time_label = tk.Label(
     fg="#004f71",
     bg="white"
 )
-last_car_time_label.pack(side="right", anchor="e", padx=20)
+last_car_time_label.pack(in_=bottom_frame, side="right", anchor="e", padx=20)
 
 
 # Function to update the timer label
