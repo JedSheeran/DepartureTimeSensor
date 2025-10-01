@@ -24,20 +24,20 @@ timer_label = tk.Label(
     text="Current Car \n00:00", 
     font=("Arial", 104, "bold"),
     fg="#004f71",
-    bg="white", highlightbackground="black", highlightthickness=2,
+    bg="white",
     justify="center",
     anchor="center"
 )
 timer_label.pack(pady=10, fill="both", expand=True)
 
-bottom_frame = tk.Frame(root, bg="white", highlightbackground="black", highlightthickness=2)
+bottom_frame = tk.Frame(root, bg="white")
 bottom_frame.pack(fill="x", side="bottom", pady=10)
 
 # Hourly Average Time Label
 average_time_label = tk.Label(
     root, 
     text="Average Time: 00:00", 
-    font=("Arial", 35),
+    font=("Arial", 45),
     fg="#004f71",
     bg="white"
 )
@@ -47,7 +47,7 @@ average_time_label.pack(in_=bottom_frame, side="left", anchor="w", padx=20)
 last_car_time_label = tk.Label(
     root, 
     text="Last Car's Time: 00:00", 
-    font=("Arial", 35),
+    font=("Arial", 45),
     fg="#004f71",
     bg="white"
 )
@@ -57,9 +57,10 @@ last_car_time_label.pack(in_=bottom_frame, side="right", anchor="e", padx=20)
 def update_timer():
     distanceSensor.withinHours()
     if distanceSensor.afterOperatingHours:
-        timer_label.config(text="\nOutside of Operating Hours\n\n")
+        timer_label.config(text="\nOutside of \nOperating Hours\n\n")
+        root.config(bg="black")
         last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime}")
-        root.after(60000, update_timer)  # Check again in 60 seconds
+        root.after(600000, update_timer)  # Check again in 60 seconds
         return
     distanceSensor.checkSensor()
 
@@ -87,7 +88,7 @@ def update_timer():
 def get_average_time():
     averageTime = distanceSensor.getAverageTimeForHour()
     average_time_label.config(text=f"Average Time: {averageTime or '00:00'}")
-    root.after(60000, get_average_time)  # Update every minute
+    root.after(300000, get_average_time)  # Update every 5 minutes
     
 def exit_fullscreen(event):
     root.attributes("-fullscreen", False)
@@ -95,7 +96,7 @@ def exit_fullscreen(event):
 root.bind("<Escape>", exit_fullscreen)
 root.bind("<q>", lambda e: root.destroy())
 
-get_average_time() #need to see if this works might get hung every minute
+get_average_time() #lags when runs, need to save debug file to check instead of google sheet
 update_timer()
 root.mainloop()
 # This code creates a simple GUI using Tkinter to display the current departure time

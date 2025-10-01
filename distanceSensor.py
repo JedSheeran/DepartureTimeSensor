@@ -68,8 +68,8 @@ def getAverageTimeForHour():
 def withinHours():
     global afterOperatingHours
     now = datetime.now().time()
-    if now >= datetime.strptime("15:09", "%H:%M").time() or now <= datetime.strptime("06:30", "%H:%M").time():
-        print("Outside of operating hours. Waiting until 6:00 AM to resume.")
+    if now >= datetime.strptime("15:29", "%H:%M").time() or now <= datetime.strptime("06:30", "%H:%M").time():
+        print("Outside of operating hours. Waiting until 6:30 AM to resume.")
         afterOperatingHours = True
         return afterOperatingHours
     afterOperatingHours = False
