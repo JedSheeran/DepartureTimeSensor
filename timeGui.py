@@ -60,14 +60,18 @@ def update_timer():
         timer_label.config(text="\nOutside of \nOperating Hours\n\n", bg="black")
         title_label.config(bg="black")
         root.config(bg="black")
-        last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime}")
+        average_time_label.config(bg="black")
+        last_car_time_label.config(bg="black")
         root.after(600000, update_timer)  # Check again in 60 seconds
-        
+
     distanceSensor.checkSensor()
 
     elapsedTime = distanceSensor.getElapsedTime()
-    timer_label.config(text=f"Current Car\n{distanceSensor.formatTime(elapsedTime)}")
-    last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime or '00:00'}")
+    timer_label.config(text=f"Current Car\n{distanceSensor.formatTime(elapsedTime)}", bg="white")
+    title_label.config(bg="white")
+    root.config(bg="white")
+    average_time_label.config(bg="white")
+    last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime or '00:00'}", bg="white")
     root.after(100, update_timer)
 
 
@@ -88,7 +92,7 @@ def update_timer():
 # This function will be called every 60 seconds to update the average time label
 def get_average_time():
     averageTime = distanceSensor.getAverageTimeForHour()
-    average_time_label.config(text=f"Average Time: {averageTime or '00:00'}")
+    average_time_label.config(text=f"Average Time: {averageTime or '00:00'}", bg="white")
     root.after(300000, get_average_time)  # Update every 5 minutes
     
 def exit_fullscreen(event):
