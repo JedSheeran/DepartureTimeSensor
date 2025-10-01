@@ -55,6 +55,7 @@ last_car_time_label.pack(in_=bottom_frame, side="right", anchor="e", padx=20)
 
 
 def update_timer():
+    '''
     distanceSensor.withinHours()
     if distanceSensor.afterOperatingHours:
         timer_label.config(text="\nOutside of \nOperating Hours\n\n", bg="black")
@@ -63,7 +64,7 @@ def update_timer():
         average_time_label.config(bg="black")
         last_car_time_label.config(bg="black")
         root.after(600000, update_timer)  # Check again in 60 seconds
-
+'''
     distanceSensor.checkSensor()
 
     elapsedTime = distanceSensor.getElapsedTime()
