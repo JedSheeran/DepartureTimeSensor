@@ -22,7 +22,7 @@ title_label.pack(pady=(20, 10))
 timer_label = tk.Label(
     root, 
     text="Current Car \n00:00", 
-    font=("Arial", 60, "bold"),
+    font=("Arial", 80, "bold"),
     fg="#004f71",
     bg="white",
     justify="center",
@@ -30,14 +30,14 @@ timer_label = tk.Label(
 )
 timer_label.pack(pady=10, fill="both", expand=True)
 
-bottom_frame = tk.Frame(root, bg="white", highlightbackground="black", highlightthickness=2)
+bottom_frame = tk.Frame(root, bg="white")
 bottom_frame.pack(fill="x", side="bottom", pady=10)
 
 # Hourly Average Time Label
 average_time_label = tk.Label(
     root, 
     text="Average Time: 00:00", 
-    font=("Arial", 28),
+    font=("Arial", 35),
     fg="#004f71",
     bg="white"
 )
@@ -46,8 +46,8 @@ average_time_label.pack(in_=bottom_frame, side="left", anchor="w", padx=20)
 # Last Cars Time Label
 last_car_time_label = tk.Label(
     root, 
-    text="Last Cars Time: 00:00", 
-    font=("Arial", 28),
+    text="Last Car's Time: 00:00", 
+    font=("Arial", 35),
     fg="#004f71",
     bg="white"
 )
