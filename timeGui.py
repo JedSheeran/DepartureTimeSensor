@@ -22,7 +22,7 @@ title_label.pack(pady=(20, 10))
 timer_label = tk.Label(
     root, 
     text="Current Car \n00:00", 
-    font=("Arial", 80, "bold"),
+    font=("Arial", 104, "bold"),
     fg="#004f71",
     bg="white",
     justify="center",

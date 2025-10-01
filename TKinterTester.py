@@ -36,7 +36,7 @@ def main():
     average_time_label = tk.Label(
         root, 
         text="Average Time: 00:00", 
-        font=("Arial", 28),
+        font=("Arial", 35),
         fg="#004f71",
         bg="white"
     )
@@ -46,7 +46,7 @@ def main():
     last_car_time_label = tk.Label(
         root, 
         text="Last Cars Time: 00:00", 
-        font=("Arial", 28),
+        font=("Arial", 35),
         fg="#004f71",
         bg="white"
     )
