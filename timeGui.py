@@ -42,7 +42,7 @@ average_time_label = tk.Label(
     text="Average Time: 00:00", 
     font=("Arial", 28),
     fg="#004f71",
-    bg="black"
+    bg="white"
 )
 average_time_label.pack(in_=bottom_frame, side="left", anchor="w", padx=20)
 
@@ -52,7 +52,7 @@ last_car_time_label = tk.Label(
     text="Last Cars Time: 00:00", 
     font=("Arial", 28),
     fg="#004f71",
-    bg="black"
+    bg="white"
 )
 last_car_time_label.pack(in_=bottom_frame, side="right", anchor="e", padx=20)
 
@@ -62,7 +62,7 @@ last_car_time_label.pack(in_=bottom_frame, side="right", anchor="e", padx=20)
 def update_timer():
     elapsedTime = distanceSensor.getElapsedTime()
     formattedTime = distanceSensor.formatTime(elapsedTime)
-    carNum = distanceSensor.carNum
+    #carNum = distanceSensor.carNum
     #formattedTime = "00:00" 
     timer_label.config(text=f"\nCurrent Car\n{formattedTime}\n\n")
     last_car_time_label.config(text=f"Last Cars Time: {distanceSensor.prevCarTime}")
