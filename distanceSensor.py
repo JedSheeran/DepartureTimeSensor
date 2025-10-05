@@ -9,6 +9,7 @@ carInRange = False
 startTime = None
 prevCarTime = None
 afterOperatingHours = False
+carLog = [] # stores car number, time at window, and date/time
 
 # Function to write to Google Sheets
 def writeToGoogleSheet(carNumVar, timeVar, dateVar):
@@ -42,6 +43,7 @@ def getPrevCarȚime():
 
 # Function to get the average time for the current hour
 # This function reads all rows from the Google Sheet, filters them by the current hour
+'''
 def getAverageTimeForHour():
     allRows = googleSheet.readAllRows()
     oneHourAgo = datetime.now() - timedelta(hours=1)
@@ -64,6 +66,26 @@ def getAverageTimeForHour():
         averageSeconds = sum(times) / len(times)
         return formatTime(averageSeconds)
     return "00:00"
+'''
+
+def getAverageTimeForHour():
+    global carLog
+    oneHourAgo = datetime.now() - timedelta(hours=1)
+    times = [int(m) * 60 + int(s) for (c, d, t) in carLog if t >= oneHourAgo for m, s in [d.split(':')] if len(d.split(':')) == 2]
+    if times:
+        averageSeconds = sum(times) / len(times)
+        return formatTime(averageSeconds)
+    return "00:00"
+
+def logCar(carNumVar, timeVar):
+    global carLog
+    now = datetime.now()
+
+    oneHourAgo = now - timedelta(hours=1)
+    carLog = [(c, d, t) for (c, d, t) in carLog if t >= oneHourAgo]
+
+    carLog.append((carNumVar, timeVar, now))
+
 
 def withinHours():
     global afterOperatingHours
@@ -96,4 +118,5 @@ def checkSensor():
             prevCarTime = formattedTime
             print("Car# ", carNum, "Time at Window: ", prevCarTime)
             print("***Out of range***")
+            logCar(carNum, formattedTime)
             writeToGoogleSheet(carNum, formattedTime, currentTime)

@@ -94,7 +94,7 @@ def update_timer():
 def get_average_time():
     averageTime = distanceSensor.getAverageTimeForHour()
     average_time_label.config(text=f"Average Time: {averageTime or '00:00'}", bg="white")
-    root.after(300000, get_average_time)  # Update every 5 minutes
+    root.after(1000, get_average_time)  # Update every 5 minutes
     
 def exit_fullscreen(event):
     root.attributes("-fullscreen", False)
