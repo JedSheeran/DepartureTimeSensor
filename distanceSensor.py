@@ -42,32 +42,6 @@ def getPrevCarȚime():
     return prevCarTime
 
 # Function to get the average time for the current hour
-# This function reads all rows from the Google Sheet, filters them by the current hour
-'''
-def getAverageTimeForHour():
-    allRows = googleSheet.readAllRows()
-    oneHourAgo = datetime.now() - timedelta(hours=1)
-    times = []
-    for row in allRows:
-        dateStr = row[2]  # Assuming the date is in the third column
-        try:
-            dateObj = datetime.strptime(dateStr, "%Y-%m-%d %H:%M:%S")
-            if dateObj >= oneHourAgo:
-                timeStr = row[1]  # Assuming the time is in the second column
-                try:
-                    minutes, seconds = map(int, timeStr.split(':'))
-                    totalSeconds = minutes * 60 + seconds
-                    times.append(totalSeconds)
-                except ValueError:
-                    continue
-        except ValueError:
-            continue
-    if times:
-        averageSeconds = sum(times) / len(times)
-        return formatTime(averageSeconds)
-    return "00:00"
-'''
-
 def getAverageTimeForHour():
     global carLog
     oneHourAgo = datetime.now() - timedelta(hours=1)
@@ -77,6 +51,7 @@ def getAverageTimeForHour():
         return formatTime(averageSeconds)
     return "00:00"
 
+# Function to log car data
 def logCar(carNumVar, timeVar):
     global carLog
     now = datetime.now()
@@ -86,23 +61,24 @@ def logCar(carNumVar, timeVar):
 
     carLog.append((carNumVar, timeVar, now))
 
-'''
+# Function to check if current time is within operating hours
 def withinHours():
     global afterOperatingHours
     now = datetime.now().time()
-    if now >= datetime.strptime("15:47", "%H:%M").time() or now <= datetime.strptime("15:48", "%H:%M").time():
+    if now >= datetime.strptime("17:15", "%H:%M").time() or now <= datetime.strptime("17:17", "%H:%M").time():
         print("Outside of operating hours. Waiting until 6:30 AM to resume.")
         afterOperatingHours = True
         return afterOperatingHours
     afterOperatingHours = False
     return afterOperatingHours
-    '''
+    
 
 
 def checkSensor():
     global carNum, carInRange, startTime, prevCarTime
-    #if afterOperatingHours:
-        #return 
+    withinHours()
+    if afterOperatingHours:
+        return 
     
     #print("***Waiting for car***")
     if ultrasonic.in_range and not carInRange:
@@ -120,4 +96,4 @@ def checkSensor():
             print("Car# ", carNum, "Time at Window: ", prevCarTime)
             print("***Out of range***")
             logCar(carNum, formattedTime)
-            #writeToGoogleSheet(carNum, formattedTime, currentTime)
+            writeToGoogleSheet(carNum, formattedTime, currentTime)
