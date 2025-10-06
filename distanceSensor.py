@@ -86,22 +86,23 @@ def logCar(carNumVar, timeVar):
 
     carLog.append((carNumVar, timeVar, now))
 
-
+'''
 def withinHours():
     global afterOperatingHours
     now = datetime.now().time()
-    if now >= datetime.strptime("15:47", "%H:%M").time() and now <= datetime.strptime("15:48", "%H:%M").time():
+    if now >= datetime.strptime("15:47", "%H:%M").time() or now <= datetime.strptime("15:48", "%H:%M").time():
         print("Outside of operating hours. Waiting until 6:30 AM to resume.")
         afterOperatingHours = True
         return afterOperatingHours
     afterOperatingHours = False
     return afterOperatingHours
+    '''
 
 
 def checkSensor():
     global carNum, carInRange, startTime, prevCarTime
-    if afterOperatingHours:
-        return 
+    #if afterOperatingHours:
+        #return 
     
     #print("***Waiting for car***")
     if ultrasonic.in_range and not carInRange:
