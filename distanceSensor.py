@@ -71,8 +71,6 @@ def withinHours():
         return afterOperatingHours
     afterOperatingHours = False
     return afterOperatingHours
-    
-
 
 def checkSensor():
     global carNum, carInRange, startTime, prevCarTime
