@@ -65,7 +65,7 @@ def logCar(carNumVar, timeVar):
 def withinHours():
     global afterOperatingHours
     now = datetime.now().time()
-    if now >= datetime.strptime("17:15", "%H:%M").time() or now <= datetime.strptime("17:17", "%H:%M").time():
+    if now >= datetime.strptime("22:00", "%H:%M").time() or now <= datetime.strptime("06:30", "%H:%M").time():
         print("Outside of operating hours. Waiting until 6:30 AM to resume.")
         afterOperatingHours = True
         return afterOperatingHours
