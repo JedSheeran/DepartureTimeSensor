@@ -120,4 +120,4 @@ def checkSensor():
             print("Car# ", carNum, "Time at Window: ", prevCarTime)
             print("***Out of range***")
             logCar(carNum, formattedTime)
-            writeToGoogleSheet(carNum, formattedTime, currentTime)
+            #writeToGoogleSheet(carNum, formattedTime, currentTime)
