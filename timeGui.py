@@ -64,6 +64,7 @@ def update_timer():
         average_time_label.config(bg="black")
         last_car_time_label.config(bg="black")
         root.after(60000, update_timer)  # Check again in 60 seconds
+        return
 
     elapsedTime = distanceSensor.getElapsedTime()
     timer_label.config(text=f"Current Car\n{distanceSensor.formatTime(elapsedTime)}", bg="white")
