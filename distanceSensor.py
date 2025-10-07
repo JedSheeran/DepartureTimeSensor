@@ -77,13 +77,8 @@ def checkSensor():
     withinHours()
     if afterOperatingHours:
         carInRange = False
-        elapsedTime = time.time() - startTime
-        formattedTime = formatTime(elapsedTime)
-        currentTime = getCurrentTime()
-        prevCarTime = formattedTime
-        print("Car# ", carNum, "Time at Window: ", prevCarTime)
-        print("***Out of range***")
-        writeToGoogleSheet(carNum, formattedTime, currentTime)
+        startTime = None
+        carLog.clear()
         return 
     
     #print("***Waiting for car***")
