@@ -74,12 +74,14 @@ def withinHours():
 
 def checkSensor():
     global carNum, carInRange, startTime, prevCarTime
+    '''
     withinHours()
     if afterOperatingHours:
         carInRange = False
         startTime = None
         carLog.clear()
         return 
+        '''
     
     #print("***Waiting for car***")
     if ultrasonic.in_range and not carInRange:

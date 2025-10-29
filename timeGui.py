@@ -57,6 +57,7 @@ last_car_time_label.pack(in_=bottom_frame, side="right", anchor="e", padx=20)
 def update_timer():
     #distanceSensor.withinHours()
     distanceSensor.checkSensor()
+    '''
     if distanceSensor.afterOperatingHours:
         timer_label.config(text="\nOutside of \nOperating Hours\n\n", bg="black")
         title_label.config(bg="black")
@@ -65,6 +66,7 @@ def update_timer():
         last_car_time_label.config(bg="black")
         root.after(60000, update_timer)  # Check again in 60 seconds
         return
+        '''
 
     elapsedTime = distanceSensor.getElapsedTime()
     timer_label.config(text=f"Current Car\n{distanceSensor.formatTime(elapsedTime)}", bg="white")
@@ -104,4 +106,4 @@ root.bind("<q>", lambda e: root.destroy())
 get_average_time() #lags when runs, need to save debug file to check instead of google sheet
 update_timer()
 root.mainloop()
-# This code creates a simple GUI using Tkinter to display the current departure time
+# This code creates a simple GUI uzsing Tkinter to display the current departure time
